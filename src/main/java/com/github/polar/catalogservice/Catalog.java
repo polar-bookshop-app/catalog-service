@@ -1,4 +1,4 @@
-package com.github.polar.catalog_service;
+package com.github.polar.catalogservice;
 
 public record Catalog(long id, String name) {
 }

@@ -1,4 +1,4 @@
-package com.github.polar.catalog_service;
+package com.github.polar.catalogservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

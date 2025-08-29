@@ -1,4 +1,4 @@
-package com.github.polar.catalog_service;
+package com.github.polar.catalogservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
