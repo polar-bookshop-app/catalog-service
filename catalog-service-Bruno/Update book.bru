@@ -1,0 +1,20 @@
+meta {
+  name: Update book
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{CATALOG_URL}}/books/0321349601
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "isbn": "0321349601", 
+    "title": "Java Concurrency in Practice",
+    "author": "Brian Goetz", 
+    "price": "57.99"
+  }
+}

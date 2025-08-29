@@ -1,0 +1,20 @@
+meta {
+  name: Create book
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{CATALOG_URL}}/books
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "isbn": "1633437167", 
+    "title": "Build a Large Language Model (From Scratch)",
+    "author": "Sebastian Raschka", 
+    "price": "51.67"
+  }
+}

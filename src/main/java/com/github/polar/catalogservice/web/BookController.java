@@ -2,9 +2,9 @@ package com.github.polar.catalogservice.web;
 
 import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.domain.BookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +21,26 @@ public class BookController {
     @GetMapping
     public List<Book> listBooks() {
         return bookService.listBooks();
+    }
+
+    @GetMapping("{isbn}")
+    public Book getByIsbn(@PathVariable String isbn) {
+        return bookService.viewBook(isbn);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book createBook(@RequestBody Book book) {
+        return bookService.addBook(book);
+    }
+
+    @DeleteMapping("{isbn}")
+    public void deleteBook(@PathVariable String isbn) {
+        bookService.deleteBook(isbn);
+    }
+
+    @PutMapping("{isbn}")
+    public void updateOrCreateBook(@PathVariable String isbn, @RequestBody Book book) {
+        bookService.updateOrCreateBook(isbn, book);
     }
 }

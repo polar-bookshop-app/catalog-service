@@ -36,7 +36,7 @@ public class BookService {
         return bookRepository.delete(isbn);
     }
 
-    public Book editBook(String isbn, Book book) {
+    public Book updateOrCreateBook(String isbn, Book book) {
 
         Optional<Book> maybeExistingBook = bookRepository.findById(isbn);
 
