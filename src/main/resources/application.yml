@@ -1,6 +1,9 @@
 spring:
   application:
     name: catalog-service
+  mvc:
+    servlet:
+      path: /${app.api.version}
 
 server:
   port: 9001
@@ -10,4 +13,9 @@ server:
     threads:
       max: 30 # default 200
       min-spare: 5 # default 10
+
+
+app:
+  api:
+    version: 20250525
 
