@@ -2,16 +2,14 @@ package com.github.polar.catalogservice.web;
 
 import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
 import com.github.polar.catalogservice.domain.BookNotFoundException;
-
+import java.util.Collections;
+import java.util.HashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Collections;
-import java.util.HashMap;
 
 @RestControllerAdvice
 public class BookControllerAdvice {

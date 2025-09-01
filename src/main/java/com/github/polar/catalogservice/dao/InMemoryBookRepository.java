@@ -2,12 +2,10 @@ package com.github.polar.catalogservice.dao;
 
 import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.domain.BookRepository;
-
-import org.springframework.stereotype.Repository;
-
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class InMemoryBookRepository implements BookRepository {

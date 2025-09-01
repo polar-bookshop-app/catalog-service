@@ -9,7 +9,7 @@ import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
 import com.github.polar.catalogservice.domain.BookNotFoundException;
 import com.github.polar.catalogservice.domain.BookService;
-
+import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,8 +20,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.math.BigDecimal;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTest {

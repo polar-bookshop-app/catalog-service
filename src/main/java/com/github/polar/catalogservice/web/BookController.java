@@ -2,13 +2,10 @@ package com.github.polar.catalogservice.web;
 
 import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.domain.BookService;
-
 import jakarta.validation.Valid;
-
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("books")

@@ -1,8 +1,7 @@
 package com.github.polar.catalogservice.web;
 
-import org.springframework.http.HttpStatus;
-
 import java.util.Map;
+import org.springframework.http.HttpStatus;
 
 /**
  * Common HTTP error message details.

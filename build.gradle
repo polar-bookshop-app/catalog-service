@@ -2,6 +2,17 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.5'
     id 'io.spring.dependency-management' version '1.1.7'
+//    id 'com.diffplug.spotless' version '7.2.1' // https://plugins.gradle.org/plugin/com.diffplug.spotless
+    id 'com.diffplug.spotless' version '6.25.0' // replace with your version
+}
+
+spotless {
+    java {
+        removeUnusedImports()
+
+        // Set version and format style
+        googleJavaFormat('1.17.0').aosp()
+    }
 }
 
 group = 'com.github.polar'
@@ -37,3 +48,10 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// automatically run spotless formatting during build
+tasks.named('compileJava') {
+    dependsOn tasks.named('spotlessApply')
+}
+
+
