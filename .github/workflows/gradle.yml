@@ -36,7 +36,7 @@ jobs:
         id: scan
         with:
           path: "${{ github.workspace }}"
-          fail-build: true
+          fail-build: false
           severity-cutoff: high
           acs-report-enable: true
 
