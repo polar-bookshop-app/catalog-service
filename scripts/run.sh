@@ -6,6 +6,8 @@ JMX_REMOTE_CONNECTION="-Dcom.sun.management.jmxremote \
 
 REMOTE_DEBUGGER=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
 
+SPRING_ADDITIONAL_PROPERTIES="-Dcatalog.service.testdata.enabled=true"
+
 export JAVA_TOOL_OPTIONS="-XX:+ExitOnOutOfMemoryError \
   -XX:MaxDirectMemorySize=10M \
   -Xmx1506507K \
@@ -13,7 +15,8 @@ export JAVA_TOOL_OPTIONS="-XX:+ExitOnOutOfMemoryError \
   -XX:ReservedCodeCacheSize=240M \
   -Xss1M \
   $JMX_REMOTE_CONNECTION \
-  $REMOTE_DEBUGGER"
+  $REMOTE_DEBUGGER \
+  $SPRING_ADDITIONAL_PROPERTIES"
 
 # Some ENVs
 #export TOMCAT_THREADS_MIN=5

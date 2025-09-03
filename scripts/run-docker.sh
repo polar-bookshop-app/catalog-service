@@ -16,6 +16,7 @@ DOCKER_IMAGE_NAME=catalog-service:0.0.1-SNAPSHOT
 ##############################################################################################
 docker run --rm \
   -p 9001:9001 \
+  -e JAVA_OPTS="-Dcatalog.service.testdata.enabled=true" \
   -e BPL_JAVA_NMT_ENABLED=false \
   --cpus=2 \
   --memory=2g --memory-swap=2g --memory-reservation=1g \

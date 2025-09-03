@@ -61,4 +61,8 @@ tasks.named('compileJava') {
     dependsOn tasks.named('spotlessApply')
 }
 
+bootRun {
+    systemProperty 'catalog.service.testdata.enabled', 'true' // enabled 'BookDataLoader' for './gradlew bootRun'
+}
+
 
