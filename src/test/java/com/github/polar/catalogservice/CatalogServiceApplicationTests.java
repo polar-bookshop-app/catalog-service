@@ -2,11 +2,13 @@ package com.github.polar.catalogservice;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.github.polar.catalogservice.config.PingConfig;
 import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.web.ErrorDetails;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
@@ -21,6 +23,8 @@ class CatalogServiceApplicationTests {
 
     @LocalServerPort int port;
 
+    @Autowired PingConfig pingConfig;
+
     private WebTestClient client;
 
     @BeforeEach
@@ -30,6 +34,17 @@ class CatalogServiceApplicationTests {
 
     @Test
     void loadContext() {}
+
+    @Test
+    void ping() {
+        client.get()
+                .uri("/ping")
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody(String.class)
+                .value(value -> assertThat(value).isEqualTo(pingConfig.getMessage()));
+    }
 
     @Test
     void createBookDuplicateShouldFail() {

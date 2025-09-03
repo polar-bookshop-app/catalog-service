@@ -4,6 +4,9 @@ spring:
   mvc:
     servlet:
       path: /${app.api.version}
+  threads:
+    virtual:
+      enabled: true # enabled/disable virtual thread, default is 'true' for spring boot 3.5
 
 server:
   port: 9001
@@ -14,6 +17,8 @@ server:
       max: 30 # default 200
       min-spare: 5 # default 10
 
+pong:
+  message: "POOONG"
 
 app:
   api:
