@@ -10,10 +10,9 @@ spring:
     servlet:
       path: /${app.api.version}
 
-pong:
-  message: "POOONG"
-
 app:
   api:
     version: 20250525 # If you are changing value here don't forget to update 'CatalogServiceApplicationTests.BASE_URL'
 
+pong:
+  message: "POOONG"

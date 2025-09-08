@@ -30,10 +30,17 @@ server:
       max: 30 # default 200
       min-spare: 5 # default 10
 
-pong:
-  message: "POOONG"
-
 app:
   api:
     version: 20250525 # If you are changing value here don't forget to update 'CatalogServiceApplicationTests.BASE_URL'
 
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+# Custom properties
+pong:
+  message: "POOONG"
