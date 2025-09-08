@@ -4,9 +4,19 @@ Catalog Service Spring Boot REST API application.
 
 ## Build and Run locally
 
+* Build application without tests
+
 ```bash
 ./gradlew build -i -x test
 ```
+
+* Start Postgres DB in docker (detached mode)
+
+```bash
+./db/start-db.sh
+```
+
+* Start service locally
 
 ```bash
 ./scripts/run.sh
@@ -20,10 +30,10 @@ Catalog Service Spring Boot REST API application.
 ./gradlew bootBuildImage
 ```
 
-* Scan docker image for vulnerabilities (optional)
+* Start Postgres DB in docker (detached mode)
 
 ```bash
-grype docker:catalog-service:0.0.1-SNAPSHOT
+./db/start-db.sh
 ```
 
 * Run docker locally
@@ -36,8 +46,16 @@ grype docker:catalog-service:0.0.1-SNAPSHOT
 
 We will use [grype](https://github.com/anchore/grype) as our vulnerability scanner for CI and locally.
 
+* Scan local repository
+
 ```bash
 grype . --name catalog-service
+```
+
+* Scan docker image
+
+```bash
+grype docker:catalog-service:0.0.1-SNAPSHOT
 ```
 
 ## Logo
