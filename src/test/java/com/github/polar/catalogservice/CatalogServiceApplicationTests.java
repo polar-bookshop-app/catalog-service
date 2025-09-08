@@ -53,7 +53,8 @@ class CatalogServiceApplicationTests {
                         "1633437167",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         // create book 1-st request should succeed
         client.post().uri("/books").bodyValue(book).exchange().expectStatus().isCreated();

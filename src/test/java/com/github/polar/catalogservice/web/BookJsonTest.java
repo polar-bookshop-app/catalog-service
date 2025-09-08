@@ -22,7 +22,8 @@ public class BookJsonTest {
                         "1111111111",
                         "Build a Large Language Model",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         var bookJson = jackson.write(book);
 
@@ -44,7 +45,8 @@ public class BookJsonTest {
               "isbn": "1633437167",
               "title": "Build a Large Language Model",
               "author": "Sebastian Raschka",
-              "price": 51.67
+              "price": 51.67,
+              "publisher": "Manning"
             }
             """;
 
@@ -55,6 +57,7 @@ public class BookJsonTest {
                                 "1633437167",
                                 "Build a Large Language Model",
                                 "Sebastian Raschka",
-                                new BigDecimal("51.67")));
+                                new BigDecimal("51.67"),
+                                "Manning"));
     }
 }

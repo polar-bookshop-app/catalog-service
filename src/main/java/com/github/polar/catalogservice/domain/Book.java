@@ -21,11 +21,13 @@ public record Book(
         @NotNull(message = "Book 'price' must be defined")
                 @Positive(message = "Book 'price' must be positive")
                 BigDecimal price,
+        @NotBlank(message = "Book 'publisher' must be defined") String publisher,
         @CreatedDate Instant createdDate,
         @LastModifiedDate Instant lastModifiedDate,
         @Version int version) {
 
-    public static Book of(String isbn, String title, String author, BigDecimal price) {
-        return new Book(null, isbn, title, author, price, null, null, 0);
+    public static Book of(
+            String isbn, String title, String author, BigDecimal price, String publisher) {
+        return new Book(null, isbn, title, author, price, publisher, null, null, 0);
     }
 }

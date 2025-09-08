@@ -33,6 +33,7 @@ public class BookRepositoryTest {
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
+                        "Manning",
                         Instant.now(),
                         Instant.now(),
                         0));
@@ -58,6 +59,7 @@ public class BookRepositoryTest {
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
+                        "Manning",
                         Instant.now(),
                         Instant.now(),
                         0));
@@ -69,7 +71,8 @@ public class BookRepositoryTest {
                                             "1449373321",
                                             "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                                             "Martin Kleppmann",
-                                            new BigDecimal("59.99")));
+                                            new BigDecimal("59.99"),
+                                            "Manning"));
                         })
                 .isInstanceOf(DbActionExecutionException.class)
                 .hasCauseInstanceOf(DataIntegrityViolationException.class);
@@ -89,6 +92,7 @@ public class BookRepositoryTest {
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
+                        "Manning",
                         Instant.now(),
                         Instant.now(),
                         0));

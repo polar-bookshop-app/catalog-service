@@ -55,6 +55,7 @@ public class BookControllerTest {
                                 "Build a Large Language Model (From Scratch)",
                                 "Sebastian Raschka",
                                 new BigDecimal("51.67"),
+                                "Manning",
                                 Instant.now(),
                                 Instant.now(),
                                 1));
@@ -89,7 +90,8 @@ public class BookControllerTest {
                         isbn,
                         "Build a Large Language Model",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         when(bookService.addBook(book)).thenReturn(book);
 
@@ -99,7 +101,8 @@ public class BookControllerTest {
               "isbn": "3333333333",
               "title": "Build a Large Language Model",
               "author": "Sebastian Raschka",
-              "price": 51.67
+              "price": 51.67,
+              "publisher": "Manning"
             }
             """;
 
@@ -148,7 +151,8 @@ public class BookControllerTest {
               "isbn": "7777777777",
               "title": "Build a Large Language Model",
               "author": "Sebastian Raschka",
-              "price": 51.67
+              "price": 51.67,
+              "publisher": "Manning"
             }
             """;
 
@@ -157,7 +161,8 @@ public class BookControllerTest {
                         "7777777777",
                         "Build a Large Language Model",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         when(bookService.addBook(book)).thenThrow(new BookAlreadyExistsException("7777777777"));
 

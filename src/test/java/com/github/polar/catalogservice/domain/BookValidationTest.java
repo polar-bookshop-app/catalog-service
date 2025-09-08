@@ -26,7 +26,8 @@ public class BookValidationTest {
                         "1633437167",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
 
@@ -40,7 +41,8 @@ public class BookValidationTest {
                         "1633437167",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",
-                        new BigDecimal("-51.67"));
+                        new BigDecimal("-51.67"),
+                        "Manning");
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
 
@@ -57,7 +59,8 @@ public class BookValidationTest {
                         "1633437167ABC",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",
-                        new BigDecimal("51.67"));
+                        new BigDecimal("51.67"),
+                        "Manning");
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
 
