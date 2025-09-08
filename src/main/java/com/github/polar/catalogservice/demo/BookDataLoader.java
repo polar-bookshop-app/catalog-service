@@ -9,6 +9,10 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Loads a set of sample books into the database, but only when running in the local (demo)
+ * environment.
+ */
 @Component
 @ConditionalOnProperty(name = "catalog.service.testdata.enabled", havingValue = "true")
 public class BookDataLoader {
