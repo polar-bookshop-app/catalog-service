@@ -9,6 +9,9 @@ spring:
   mvc:
     servlet:
       path: /${app.api.version}
+  sql:
+    init:
+      mode: always
 
 app:
   api:
