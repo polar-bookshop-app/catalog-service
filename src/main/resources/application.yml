@@ -20,6 +20,13 @@ spring:
   threads:
     virtual:
       enabled: true # enabled/disable virtual thread, default is 'true' for spring boot 3.5
+  datasource:
+    username: "catalog-user"
+    password: "catalog-password"
+    url: "jdbc:postgresql://localhost:5432/catalog_db"
+    hikari:
+      connection-timeout: 2000 # max time waiting to get connection from a pool
+      maximum-pool-size: 5
 
 server:
   port: 9001

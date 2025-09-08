@@ -9,6 +9,13 @@ spring:
   mvc:
     servlet:
       path: /${app.api.version}
+  datasource:
+    username: "catalog-user"
+    password: "catalog-password"
+    url: "jdbc:postgresql://localhost:5432/catalog_db"
+    hikari:
+      connection-timeout: 2000 # max time waiting to get connection from a pool
+      maximum-pool-size: 5
 
 app:
   api:
