@@ -17,5 +17,10 @@ app:
   api:
     version: 20250525 # If you are changing value here don't forget to update 'CatalogServiceApplicationTests.BASE_URL'
 
+catalog:
+  service:
+    testdata:
+      enabled: true
+
 pong:
   message: "POOONG"

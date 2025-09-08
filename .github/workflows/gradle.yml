@@ -52,4 +52,4 @@ jobs:
       - name: Build, run unit and integration tests
         run: |
           chmod a+x gradlew
-          ./gradlew build
+          ./gradlew build -i
