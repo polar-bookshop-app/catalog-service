@@ -10,9 +10,23 @@ spring:
     servlet:
       path: /${app.api.version}
 
+server:
+  port: 9001
+  tomcat:
+    connection-timeout: 2s # default 20
+    keep-alive-timeout: 15s
+    threads:
+      max: 30 # default 200
+      min-spare: 5 # default 10
+
 app:
   api:
     version: 20250525 # If you are changing value here don't forget to update 'CatalogServiceApplicationTests.BASE_URL'
+
+catalog:
+  service:
+    testdata:
+      enabled: "true"
 
 pong:
   message: "POOONG"
