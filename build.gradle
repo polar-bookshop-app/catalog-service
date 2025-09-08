@@ -28,6 +28,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2025.0.0")
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -40,6 +44,8 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.retry:spring-retry'
 //	implementation 'org.flywaydb:flyway-core'
 //	implementation 'org.flywaydb:flyway-database-postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -50,6 +56,12 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
 //	testImplementation 'org.testcontainers:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
@@ -63,6 +75,8 @@ tasks.named('compileJava') {
 
 bootRun {
     systemProperty 'catalog.service.testdata.enabled', 'true' // enabled 'BookDataLoader' for './gradlew bootRun'
+    systemProperty 'spring.cloud.config.fail-fast', 'false' // make config service optional
+//    systemProperty 'spring.profiles.active', 'prod' // enabled 'prod' profile
 }
 
 

@@ -1,10 +1,10 @@
 meta {
-  name: Delete book
+  name: Get by isbn
   type: http
-  seq: 4
+  seq: 1
 }
 
-delete {
+get {
   url: {{CATALOG_URL}}/books/1449373321
   body: none
   auth: inherit

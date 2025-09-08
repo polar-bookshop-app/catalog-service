@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config: # config client uri and connections parameters
+      fail-fast: false
+  mvc:
+    servlet:
+      path: /${app.api.version}
+
+pong:
+  message: "POOONG"
+
+app:
+  api:
+    version: 20250525 # If you are changing value here don't forget to update 'CatalogServiceApplicationTests.BASE_URL'
+

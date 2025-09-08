@@ -6,7 +6,7 @@ JMX_REMOTE_CONNECTION="-Dcom.sun.management.jmxremote \
 
 REMOTE_DEBUGGER=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
 
-SPRING_ADDITIONAL_PROPERTIES="-Dcatalog.service.testdata.enabled=true"
+SPRING_ADDITIONAL_PROPERTIES="-Dcatalog.service.testdata.enabled=true spring.cloud.config.fail-fast=false"
 
 export JAVA_TOOL_OPTIONS="-XX:+ExitOnOutOfMemoryError \
   -XX:MaxDirectMemorySize=10M \

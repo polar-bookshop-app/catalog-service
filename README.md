@@ -5,7 +5,7 @@ Catalog Service Spring Boot REST API application.
 ## Build and Run locally
 
 ```bash
-./gradlew build -i
+./gradlew build -i -x test
 ```
 
 ```bash
