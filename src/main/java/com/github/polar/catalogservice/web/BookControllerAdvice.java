@@ -2,8 +2,8 @@ package com.github.polar.catalogservice.web;
 
 import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
 import com.github.polar.catalogservice.domain.BookNotFoundException;
-import java.util.Collections;
-import java.util.HashMap;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,8 +11,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Collections;
+import java.util.HashMap;
+
 @RestControllerAdvice
 public class BookControllerAdvice {
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    ErrorDetails dataIntegrationViolationException(DataIntegrityViolationException ex) {
+        return new ErrorDetails(
+                "https://example.com/probs/data-integrity-violated",
+                "Book already exists",
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ex.getMessage(),
+                "/books/",
+                Collections.emptyMap());
+    }
 
     @ExceptionHandler(BookNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

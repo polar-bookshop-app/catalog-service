@@ -3,6 +3,7 @@ package com.github.polar.catalogservice.demo;
 import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.domain.BookRepository;
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -21,32 +22,36 @@ public class BookDataLoader {
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
 
-        bookRepository.save(
-                new Book(
+        bookRepository.deleteAll();
+
+        var book1 =
+                Book.of(
                         "1449373321",
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
-                        new BigDecimal("59.99")));
+                        new BigDecimal("59.99"));
 
-        bookRepository.save(
-                new Book(
+        var book2 =
+                Book.of(
                         "0321842685",
                         "Hacker's Delight 2nd Edition",
                         "Henry Warren",
-                        new BigDecimal("47.68")));
+                        new BigDecimal("47.68"));
 
-        bookRepository.save(
-                new Book(
+        var book3 =
+                Book.of(
                         "0321349601",
                         "Java Concurrency in Practice",
                         "Brian Goetz, Tim Peierls, Joshua Bloch, Joseph Bowbeer David Holmes",
-                        new BigDecimal("28.00")));
+                        new BigDecimal("28.00"));
 
-        bookRepository.save(
-                new Book(
+        var book4 =
+                Book.of(
                         "0134685997",
                         "Effective Java 3rd Edition",
                         "Joshua Bloch",
-                        new BigDecimal("43.86")));
+                        new BigDecimal("43.86"));
+
+        bookRepository.saveAll(List.of(book1, book2, book3, book4));
     }
 }

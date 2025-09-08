@@ -10,6 +10,7 @@ import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
 import com.github.polar.catalogservice.domain.BookNotFoundException;
 import com.github.polar.catalogservice.domain.BookService;
 import java.math.BigDecimal;
+import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -49,10 +50,14 @@ public class BookControllerTest {
         when(bookService.viewBook(isbn))
                 .thenReturn(
                         new Book(
+                                1L,
                                 isbn,
                                 "Build a Large Language Model (From Scratch)",
                                 "Sebastian Raschka",
-                                new BigDecimal("51.67")));
+                                new BigDecimal("51.67"),
+                                Instant.now(),
+                                Instant.now(),
+                                1));
 
         mockMvc.perform(get(String.format("/books/%s", isbn)))
                 .andExpect(status().isOk())
@@ -80,7 +85,7 @@ public class BookControllerTest {
     void createBookNormalCase() throws Exception {
         String isbn = "3333333333";
         var book =
-                new Book(
+                Book.of(
                         isbn,
                         "Build a Large Language Model",
                         "Sebastian Raschka",
@@ -148,7 +153,7 @@ public class BookControllerTest {
             """;
 
         var book =
-                new Book(
+                Book.of(
                         "7777777777",
                         "Build a Large Language Model",
                         "Sebastian Raschka",

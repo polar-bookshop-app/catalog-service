@@ -27,6 +27,9 @@ spring:
     hikari:
       connection-timeout: 2000 # max time waiting to get connection from a pool
       maximum-pool-size: 5
+  sql:
+    init:
+      mode: always
 
 server:
   port: 9001

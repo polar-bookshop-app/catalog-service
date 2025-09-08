@@ -1,14 +1,17 @@
 package com.github.polar.catalogservice.domain;
 
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jdbc.repository.query.Modifying;
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface BookRepository {
-    List<Book> listAllBooks();
+public interface BookRepository extends CrudRepository<Book, Long> {
 
-    Optional<Book> findById(String isbn);
+    Optional<Book> findByIsbn(String isbn);
 
-    boolean save(Book book);
-
-    boolean delete(String isbn);
+    @Modifying
+    @Query("delete from Book where isbn = :isbn")
+    @Transactional
+    boolean deleteByIsbn(String isbn);
 }

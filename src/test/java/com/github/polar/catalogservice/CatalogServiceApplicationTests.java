@@ -49,7 +49,7 @@ class CatalogServiceApplicationTests {
     @Test
     void createBookDuplicateShouldFail() {
         var book =
-                new Book(
+                Book.of(
                         "1633437167",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",

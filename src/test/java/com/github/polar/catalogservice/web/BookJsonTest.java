@@ -18,7 +18,7 @@ public class BookJsonTest {
     @Test
     void serializeBook() throws IOException {
         var book =
-                new Book(
+                Book.of(
                         "1111111111",
                         "Build a Large Language Model",
                         "Sebastian Raschka",
@@ -51,7 +51,7 @@ public class BookJsonTest {
         assertThat(jackson.parse(bookJson))
                 .isNotNull()
                 .isEqualTo(
-                        new Book(
+                        Book.of(
                                 "1633437167",
                                 "Build a Large Language Model",
                                 "Sebastian Raschka",
