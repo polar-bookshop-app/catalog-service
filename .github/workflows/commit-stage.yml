@@ -23,8 +23,8 @@ on:
 
 env:
   REGISTRY: "ghcr.io"
-  IMAGE_NAME: "mstepan/catalog-service"
-  VERSION: "latest-v2"
+  IMAGE_NAME: "polar-bookshop-app/catalog-service"
+  VERSION: "latest"
 
 jobs:
 
@@ -122,7 +122,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.POLAR_BOOKSHOP_TOKEN }} # https://github.com/organizations/polar-bookshop-app/settings/secrets/actions
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish container image
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
