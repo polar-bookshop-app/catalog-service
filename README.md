@@ -36,12 +36,6 @@ Catalog Service Spring Boot REST API application.
 ./db/start-db.sh
 ```
 
-* Run docker locally
-
-```bash
-./scripts/run-docker.sh
-```
-
 ## Vulnerability Scan
 
 We will use [grype](https://github.com/anchore/grype) as our vulnerability scanner for CI and locally.
