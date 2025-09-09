@@ -4,7 +4,7 @@
 JMX_REMOTE_CONNECTION="-Dcom.sun.management.jmxremote \
   -Djava.rmi.server.hostname=localhost"
 
-REMOTE_DEBUGGER=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+REMOTE_DEBUGGER=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8001
 
 # Load initial test data to DB
 export CATALOG_SERVICE_TESTDATA_ENABLED="true"
