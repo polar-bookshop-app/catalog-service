@@ -1,13 +1,19 @@
 package com.github.polar.catalogservice.domain;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookService {
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private final BookRepository bookRepository;
 
@@ -45,7 +51,7 @@ public class BookService {
         boolean wasDeleted = bookRepository.deleteByIsbn(isbn);
 
         if (!wasDeleted) {
-            System.out.printf("Warning: can't delete book with isbn '%s', doesnt exist.", isbn);
+            LOGGER.warn("Warning: can't delete book with isbn '{}', doesnt exist.", isbn);
         }
     }
 
