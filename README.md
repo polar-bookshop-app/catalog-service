@@ -49,7 +49,7 @@ grype . --name catalog-service
 * Scan docker image
 
 ```bash
-grype docker:catalog-service:0.0.1-SNAPSHOT
+grype docker:catalog-service:latest
 ```
 
 ## Logo
