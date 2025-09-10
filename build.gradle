@@ -87,24 +87,18 @@ bootBuildImage {
     //
     // https://paketo.io/docs/howto/java/#use-an-alternative-jvm
     //
-    builder = "paketobuildpacks/builder-jammy-full"
+    builder = "paketobuildpacks/builder-noble-java-tiny"
 
-    // https://github.com/paketo-buildpacks/graalvm
+    // https://github.com/paketo-buildpacks/bellsoft-liberica
     buildpacks = [
-            "paketobuildpacks/graalvm", "paketobuildpacks/java"
+            "paketo-buildpacks/bellsoft-liberica", "paketobuildpacks/java"
     ]
-
-    //https://github.com/paketo-buildpacks/azul-zulu
-//    buildpacks = [
-//            "paketobuildpacks/azul-zulu", "paketobuildpacks/java"
-//    ]
 
     imageName = "${project.name}"
     // https://github.com/paketo-buildpacks/graalvm?tab=readme-ov-file#configuration
     environment = [
-            "BP_JVM_VERSION"      : "24.*",
-            "BP_JVM_TYPE"         : "JRE",
-            "BP_JVM_JLINK_ENABLED": "true"
+            "BP_JVM_VERSION": "24.*",
+            "BP_JVM_TYPE"   : "JRE",
     ]
     //https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html#build-image.examples.publish
     docker {
