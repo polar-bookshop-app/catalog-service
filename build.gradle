@@ -90,14 +90,14 @@ bootBuildImage {
     builder = "paketobuildpacks/builder-jammy-full"
 
     // https://github.com/paketo-buildpacks/graalvm
-//    buildpacks = [
-//            "paketobuildpacks/graalvm", "paketobuildpacks/java"
-//    ]
+    buildpacks = [
+            "paketobuildpacks/graalvm", "paketobuildpacks/java"
+    ]
 
     //https://github.com/paketo-buildpacks/azul-zulu
-    buildpacks = [
-            "paketobuildpacks/azul-zulu", "paketobuildpacks/java"
-    ]
+//    buildpacks = [
+//            "paketobuildpacks/azul-zulu", "paketobuildpacks/java"
+//    ]
 
     imageName = "${project.name}"
     // https://github.com/paketo-buildpacks/graalvm?tab=readme-ov-file#configuration
