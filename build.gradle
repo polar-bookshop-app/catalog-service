@@ -82,8 +82,31 @@ bootRun {
 
 
 bootBuildImage {
+    //
+    // https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html#build-image.customization
+    //
+    // https://paketo.io/docs/howto/java/#use-an-alternative-jvm
+    //
+    builder = "paketobuildpacks/builder-jammy-full"
+
+    // https://github.com/paketo-buildpacks/graalvm
+//    buildpacks = [
+//            "paketobuildpacks/graalvm", "paketobuildpacks/java"
+//    ]
+
+    //https://github.com/paketo-buildpacks/azul-zulu
+    buildpacks = [
+            "paketobuildpacks/azul-zulu", "paketobuildpacks/java"
+    ]
+
     imageName = "${project.name}"
-    environment = ["BP_JVM_VERSION": "24.*"]
+    // https://github.com/paketo-buildpacks/graalvm?tab=readme-ov-file#configuration
+    environment = [
+            "BP_JVM_VERSION"      : "24.*",
+            "BP_JVM_TYPE"         : "JRE",
+            "BP_JVM_JLINK_ENABLED": "true"
+    ]
+    //https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html#build-image.examples.publish
     docker {
         publishRegistry {
             username = project.findProperty("registryUsername")
@@ -92,5 +115,3 @@ bootBuildImage {
         }
     }
 }
-
-
