@@ -38,7 +38,8 @@ spec:
         - name: ghcr-secret
       containers:
         - name: catalog-service
-          image: ghcr.io/polar-bookshop-app/catalog-service:latest
+          image: localhost:5000/catalog-service:latest # local registry
+          #          image: ghcr.io/polar-bookshop-app/catalog-service:latest # Github registry
           imagePullPolicy: Always
           ports:
             - containerPort: 9001   # API port

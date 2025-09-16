@@ -3,4 +3,4 @@
 # exit immediately if a command returns a non-zero status.
 set -e
 
-kubectl port-forward service/catalog-service 9001:9001 8001:8001
+docker run -d --rm -p 5000:5000 --name local-registry registry:2
