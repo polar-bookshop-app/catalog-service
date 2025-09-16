@@ -32,6 +32,7 @@ spec:
       containers:
         - name: catalog-db
           image: postgres:17.6
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
           env:

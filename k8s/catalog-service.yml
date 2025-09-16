@@ -39,6 +39,7 @@ spec:
       containers:
         - name: catalog-service
           image: ghcr.io/polar-bookshop-app/catalog-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 9001   # API port
             - containerPort: 8001   # Debug port
