@@ -15,13 +15,10 @@ CONTAINER_NAME=catalog-db
 #
 ##############################################################################################
 
-docker network inspect polar-bookshop-network >/dev/null 2>&1 || \
-  docker network create polar-bookshop-network
-
 docker ps -a -q -f name=${CONTAINER_NAME} | grep -q . && docker stop ${CONTAINER_NAME}
 
 docker run --rm -d \
-  --network polar-bookshop-network \
+  --network host \
   -p 5432:5432 \
   -e POSTGRES_USER=catalog-user \
   -e POSTGRES_PASSWORD=catalog-password \

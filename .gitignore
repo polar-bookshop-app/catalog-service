@@ -27,3 +27,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Ignore shell script that creates pull secrets ###
+create-pull-secret.sh

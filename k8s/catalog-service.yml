@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-service
+  labels:
+    app: catalog-service
+spec:
+  type: ClusterIP  # use NodePort or LoadBalancer if external access is needed
+  selector:
+    app: catalog-service
+  ports:
+    - name: http
+      port: 9001
+      targetPort: 9001
+    - name: debug
+      port: 8001
+      targetPort: 8001
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-service
+  labels:
+    app: catalog-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog-service
+  template:
+    metadata:
+      labels:
+        app: catalog-service
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: catalog-service
+          image: ghcr.io/polar-bookshop-app/catalog-service:latest
+          ports:
+            - containerPort: 9001   # API port
+            - containerPort: 8001   # Debug port
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+            - name: BPL_DEBUG_ENABLED
+              value: "true"
+            - name: BPL_DEBUG_PORT
+              value: "8001"
+            - name: CATALOG_SERVICE_TESTDATA_ENABLED
+              value: "true"
+            - name: SPRING_CLOUD_CONFIG_FAIL_FAST
+              value: "false"
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: "http://config-service" # todo: config service won't be available in k8s
+            - name: SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS
+              value: "3"
+            - name: SPRING_CLOUD_CONFIG_RETRY_INITIAL_INTERVAL
+              value: "1000"
+            - name: SPRING_CLOUD_CONFIG_RETRY_MAX_INTERVAL
+              value: "2000"
+            - name: SPRING_CLOUD_CONFIG_RETRY_MULTIPLIER
+              value: "1.1"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://catalog-db/catalog_db"
+            - name: BPL_JAVA_NMT_ENABLED
+              value: "false"
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              memory: "2Gi"
+
