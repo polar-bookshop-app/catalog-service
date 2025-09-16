@@ -52,24 +52,24 @@ grype . --name catalog-service
 grype docker:catalog-service:latest
 ```
 
-## k8s and local registry
+## K8S and Local Registry
 
-To run k8s with local registry you should do the following steps.
-
-* Start local registry using
+* Build, publish and deploy to local K8S cluster
 
 ```bash
-./k8s/local-registry.sh
+./k8s/deploy-all.sh
 ```
 
-* Build, tag and push image to local registry
+If for some reason port-forwarding failed just execute:
 
 ```bash
-./gradlew bootBuildImage
+kubectl port-forward service/catalog-service 9001:9001 8001:8001
+```
 
-docker tag catalog-service:latest localhost:5000/catalog-service:latest
+* Clean local K8S cluster
 
-docker push localhost:5000/catalog-service:latest
+```bash
+./k8s/remove-all.sh
 ```
 
 ## Logo
