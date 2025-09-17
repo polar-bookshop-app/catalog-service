@@ -25,7 +25,7 @@ metadata:
   labels:
     app: catalog-service
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: catalog-service
@@ -41,6 +41,10 @@ spec:
           image: localhost:5000/catalog-service:latest # local registry
           #          image: ghcr.io/polar-bookshop-app/catalog-service:latest # Github registry
           imagePullPolicy: Always
+          lifecycle:
+            preStop: # wait 5 sec before sending SIGTERM to pod, allow graceful shutdown
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
           ports:
             - containerPort: 9001   # API port
             - containerPort: 8001   # Debug port
@@ -66,7 +70,7 @@ spec:
             - name: SPRING_CLOUD_CONFIG_RETRY_MULTIPLIER
               value: "1.1"
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://catalog-db/catalog_db"
+              value: "jdbc:postgresql://catalog-db:5432/catalog_db"
             - name: BPL_JAVA_NMT_ENABLED
               value: "false"
           resources:
