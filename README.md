@@ -57,7 +57,7 @@ grype docker:catalog-service:latest
 * For K8S manifest validation use
 
 ```bash
-kubeconform -strict k8s/catalog-service.yml  k8s/catalog-db.yml
+kubeconform -strict -summary k8s/catalog-db.yml k8s/catalog-service.yml
 ```
 
 * Build, publish and deploy to local K8S cluster
