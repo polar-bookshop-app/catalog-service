@@ -54,7 +54,7 @@ grype docker:catalog-service:latest
 
 ## K8S and Local Registry
 
-* For K8S manifest validation use
+* For K8S manifest validation use [kubeconform](https://github.com/yannh/kubeconform)
 
 ```bash
 kubeconform -strict -summary k8s/catalog-db.yml k8s/catalog-service.yml
