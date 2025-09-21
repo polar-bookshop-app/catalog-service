@@ -7,12 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.MANDATORY)
 public interface BookRepository extends CrudRepository<Book, Long> {
 
     Optional<Book> findByIsbn(String isbn);
 
-    @Transactional(propagation = Propagation.MANDATORY)
     @Modifying
-    @Query("delete from Book where isbn = :isbn")
+    @Query("DELETE FROM Book WHERE isbn = :isbn")
     boolean deleteByIsbn(String isbn);
 }

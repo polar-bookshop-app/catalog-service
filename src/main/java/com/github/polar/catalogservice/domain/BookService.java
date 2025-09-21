@@ -21,18 +21,18 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    @Transactional
     public List<Book> listBooks() {
-        return toLIst(bookRepository.findAll());
+        return toList(bookRepository.findAll());
     }
 
-    private static <T> List<T> toLIst(Iterable<T> iterable) {
+    private static <T> List<T> toList(Iterable<T> iterable) {
         List<T> list = new ArrayList<>();
-
         iterable.forEach(list::add);
-
         return list;
     }
 
+    @Transactional
     public Book viewBook(String isbn) {
         return bookRepository.findByIsbn(isbn).orElseThrow(() -> new BookNotFoundException(isbn));
     }

@@ -85,4 +85,4 @@ Logo generated using https://patorjk.com/software/taag/ and `Standard` type.
 ## References
 
 * Initial template created
-  using [start.spring.io](https://start.spring.io/#!type=gradle-project&language=java&platformVersion=3.5.5&packaging=jar&jvmVersion=24&groupId=com.github.polar&artifactId=catalog-service&name=catalog-service&description=Catalog%20Service%20Spring%20Boot%20API&packageName=com.github.polar.catalog-service&dependencies=web,postgresql,testcontainers,devtools,data-jdbc,flyway)
+  using [start.spring.io](https://start.spring.io/#!type=gradle-project&language=java&platformVersion=3.5.6&packaging=jar&jvmVersion=24&groupId=com.github.polar&artifactId=catalog-service&name=catalog-service&description=Catalog%20Service%20Spring%20Boot%20API&packageName=com.github.polar.catalog-service&dependencies=web,postgresql,testcontainers,devtools,data-jdbc,flyway)
