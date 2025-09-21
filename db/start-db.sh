@@ -18,7 +18,7 @@ CONTAINER_NAME=catalog-db
 docker ps -a -q -f name=${CONTAINER_NAME} | grep -q . && docker stop ${CONTAINER_NAME}
 
 docker run --rm -d \
-  --network host \
+  -p 5432:5432 \
   -e POSTGRES_USER=catalog-user \
   -e POSTGRES_PASSWORD=catalog-password \
   -e POSTGRES_DB=catalog_db \
