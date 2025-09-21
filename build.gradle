@@ -97,7 +97,7 @@ bootBuildImage {
     imageName = "${project.name}"
     // https://github.com/paketo-buildpacks/graalvm?tab=readme-ov-file#configuration
     environment = [
-            "BP_JVM_VERSION": "24.*",
+            "BP_JVM_VERSION": "25.*", //TODO: here we use java 25 but everything else compiled using java 24
             "BP_JVM_TYPE"   : "JRE",
     ]
     //https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html#build-image.examples.publish
