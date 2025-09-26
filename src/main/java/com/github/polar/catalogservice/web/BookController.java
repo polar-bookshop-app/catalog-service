@@ -31,12 +31,6 @@ public class BookController {
     @GetMapping("{isbn}")
     public Book getByIsbn(@PathVariable String isbn) {
         LOGGER.info("getByIsbn {}", isbn);
-
-        // TODO: below added for testing purpose, to test failure mode
-        if ("0321349602".equals(isbn)) {
-            throw new IllegalStateException("Invalid ISBN");
-        }
-
         return bookService.viewBook(isbn);
     }
 
