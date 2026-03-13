@@ -42,10 +42,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Setup GraalVM 24
+      - name: Setup GraalVM 25
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '24'
+          java-version: '25'
           distribution: 'graalvm'
           cache: gradle
 
@@ -72,8 +72,6 @@ jobs:
           chmod +x gradlew
           ./gradlew build -i
 
-
-
   package:
     name: Package and Publish
     if: ${{ github.ref == 'refs/heads/master' }} # build docker image release candidate only for 'master' branch
@@ -89,10 +87,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Setup GraalVM 24
+      - name: Setup GraalVM 25
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '24'
+          java-version: '25'
           distribution: 'graalvm'
           cache: gradle
 
