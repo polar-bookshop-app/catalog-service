@@ -57,23 +57,11 @@ jobs:
           fail-build: false
           severity-cutoff: high
 
-      - name: Validate SARIF report
-        id: validate-sarif
-        if: always()
-        run: |
-          SARIF_FILE="${{ steps.scan.outputs.sarif }}"
-          if [ -n "$SARIF_FILE" ] && [ -s "$SARIF_FILE" ] && jq -e . "$SARIF_FILE" > /dev/null 2>&1; then
-            echo "valid=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "valid=false" >> "$GITHUB_OUTPUT"
-            echo "Skipping SARIF upload: output is missing, empty, or invalid JSON."
-          fi
-
-      - name: Upload vulnerability report
-        uses: github/codeql-action/upload-sarif@v4
-        if: always() && steps.validate-sarif.outputs.valid == 'true'
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+      #      - name: Upload vulnerability report
+      #        uses: github/codeql-action/upload-sarif@v3 # https://github.blog/changelog/2025-01-10-code-scanning-codeql-action-v2-is-now-deprecated/
+      #        if: success() || failure()
+      #        with:
+      #          sarif_file: ${{ steps.scan.outputs.sarif }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -119,23 +107,11 @@ jobs:
           fail-build: false
           severity-cutoff: high
 
-      - name: Validate SARIF report
-        id: validate-sarif
-        if: always()
-        run: |
-          SARIF_FILE="${{ steps.scan.outputs.sarif }}"
-          if [ -n "$SARIF_FILE" ] && [ -s "$SARIF_FILE" ] && jq -e . "$SARIF_FILE" > /dev/null 2>&1; then
-            echo "valid=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "valid=false" >> "$GITHUB_OUTPUT"
-            echo "Skipping SARIF upload: output is missing, empty, or invalid JSON."
-          fi
-
-      - name: Upload vulnerability report
-        uses: github/codeql-action/upload-sarif@v4
-        if: always() && steps.validate-sarif.outputs.valid == 'true'
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+      #      - name: Upload vulnerability report
+      #        uses: github/codeql-action/upload-sarif@v3 # https://github.blog/changelog/2025-01-10-code-scanning-codeql-action-v2-is-now-deprecated/
+      #        if: success() || failure()
+      #        with:
+      #          sarif_file: ${{ steps.scan.outputs.sarif }}
 
       - name: Login into container registry
         uses: docker/login-action@v2
