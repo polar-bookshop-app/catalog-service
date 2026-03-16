@@ -1,4 +1,4 @@
-package com.github.polar.catalogservice.domain;
+package com.github.polar.catalogservice.catalog.domain;
 
 public class BookAlreadyExistsException extends RuntimeException {
 

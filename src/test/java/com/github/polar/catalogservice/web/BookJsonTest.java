@@ -2,7 +2,7 @@ package com.github.polar.catalogservice.web;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import com.github.polar.catalogservice.domain.Book;
+import com.github.polar.catalogservice.catalog.api.BookRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
@@ -13,12 +13,12 @@ import org.springframework.boot.test.json.JacksonTester;
 @JsonTest
 public class BookJsonTest {
 
-    @Autowired private JacksonTester<Book> jackson;
+    @Autowired private JacksonTester<BookRequest> jackson;
 
     @Test
     void serializeBook() throws IOException {
         var book =
-                Book.of(
+                new BookRequest(
                         "1111111111",
                         "Build a Large Language Model",
                         "Sebastian Raschka",
@@ -53,7 +53,7 @@ public class BookJsonTest {
         assertThat(jackson.parse(bookJson))
                 .isNotNull()
                 .isEqualTo(
-                        Book.of(
+                        new BookRequest(
                                 "1633437167",
                                 "Build a Large Language Model",
                                 "Sebastian Raschka",

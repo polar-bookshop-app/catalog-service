@@ -1,7 +1,7 @@
 package com.github.polar.catalogservice.web;
 
-import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
-import com.github.polar.catalogservice.domain.BookNotFoundException;
+import com.github.polar.catalogservice.catalog.domain.BookAlreadyExistsException;
+import com.github.polar.catalogservice.catalog.domain.BookNotFoundException;
 import java.util.Collections;
 import java.util.HashMap;
 import org.springframework.dao.DataIntegrityViolationException;

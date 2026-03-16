@@ -5,10 +5,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.github.polar.catalogservice.domain.Book;
-import com.github.polar.catalogservice.domain.BookAlreadyExistsException;
-import com.github.polar.catalogservice.domain.BookNotFoundException;
-import com.github.polar.catalogservice.domain.BookService;
+import com.github.polar.catalogservice.catalog.api.BookController;
+import com.github.polar.catalogservice.catalog.api.BookRequest;
+import com.github.polar.catalogservice.catalog.api.BookResponse;
+import com.github.polar.catalogservice.catalog.application.BookService;
+import com.github.polar.catalogservice.catalog.domain.BookAlreadyExistsException;
+import com.github.polar.catalogservice.catalog.domain.BookNotFoundException;
 import java.math.BigDecimal;
 import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +54,7 @@ public class BookControllerTest {
 
         when(bookService.viewBook(isbn))
                 .thenReturn(
-                        new Book(
+                        new BookResponse(
                                 1L,
                                 isbn,
                                 "Build a Large Language Model (From Scratch)",
@@ -88,15 +90,26 @@ public class BookControllerTest {
     @Test
     void createBookNormalCase() throws Exception {
         String isbn = "3333333333";
-        var book =
-                Book.of(
+        var request =
+                new BookRequest(
                         isbn,
                         "Build a Large Language Model",
                         "Sebastian Raschka",
                         new BigDecimal("51.67"),
                         "Manning");
+        var response =
+                new BookResponse(
+                        1L,
+                        isbn,
+                        "Build a Large Language Model",
+                        "Sebastian Raschka",
+                        new BigDecimal("51.67"),
+                        "Manning",
+                        Instant.now(),
+                        Instant.now(),
+                        0);
 
-        when(bookService.addBook(book)).thenReturn(book);
+        when(bookService.addBook(request)).thenReturn(response);
 
         var bookBodyAsJson =
                 """
@@ -121,7 +134,7 @@ public class BookControllerTest {
                 .andExpect(jsonPath("@.author").value("Sebastian Raschka"))
                 .andExpect(jsonPath("@.price").value(new BigDecimal("51.67")));
 
-        verify(bookService, times(1)).addBook(book);
+        verify(bookService, times(1)).addBook(request);
     }
 
     @Test
@@ -159,15 +172,15 @@ public class BookControllerTest {
             }
             """;
 
-        var book =
-                Book.of(
+        var request =
+                new BookRequest(
                         "7777777777",
                         "Build a Large Language Model",
                         "Sebastian Raschka",
                         new BigDecimal("51.67"),
                         "Manning");
 
-        when(bookService.addBook(book)).thenThrow(new BookAlreadyExistsException("7777777777"));
+        when(bookService.addBook(request)).thenThrow(new BookAlreadyExistsException("7777777777"));
 
         mockMvc.perform(
                         post("/books")
@@ -178,6 +191,6 @@ public class BookControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("@.title").value("Book already exists"));
 
-        verify(bookService, times(1)).addBook(book);
+        verify(bookService, times(1)).addBook(request);
     }
 }

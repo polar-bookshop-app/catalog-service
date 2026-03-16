@@ -2,8 +2,8 @@ package com.github.polar.catalogservice;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.github.polar.catalogservice.catalog.api.BookRequest;
 import com.github.polar.catalogservice.config.PingConfig;
-import com.github.polar.catalogservice.domain.Book;
 import com.github.polar.catalogservice.web.ErrorDetails;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +49,7 @@ class CatalogServiceApplicationTests {
     @Test
     void createBookDuplicateShouldFail() {
         var book =
-                Book.of(
+                new BookRequest(
                         "1633437167",
                         "Build a Large Language Model (From Scratch)",
                         "Sebastian Raschka",

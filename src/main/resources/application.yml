@@ -26,12 +26,21 @@ spring:
     username: "catalog-user"
     password: "catalog-password"
     url: "jdbc:postgresql://localhost:5432/catalog_db"
+    driver-class-name: org.postgresql.Driver
     hikari:
+      minimum-idle: 10
       connection-timeout: 2000 # max time waiting to get connection from a pool
-      maximum-pool-size: 5
+      maximum-pool-size: 10
 
-server:
-  port: 9001
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
   tomcat:
     connection-timeout: 2s # default 20
     keep-alive-timeout: 15s

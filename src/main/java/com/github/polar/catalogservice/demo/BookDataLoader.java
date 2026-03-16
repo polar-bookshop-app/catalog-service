@@ -1,7 +1,7 @@
 package com.github.polar.catalogservice.demo;
 
-import com.github.polar.catalogservice.domain.Book;
-import com.github.polar.catalogservice.domain.BookRepository;
+import com.github.polar.catalogservice.catalog.domain.Book;
+import com.github.polar.catalogservice.catalog.infrastructure.BookRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

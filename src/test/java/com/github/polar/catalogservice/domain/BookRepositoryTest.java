@@ -1,50 +1,44 @@
 package com.github.polar.catalogservice.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.github.polar.catalogservice.TestcontainersConfiguration;
+import com.github.polar.catalogservice.catalog.domain.Book;
+import com.github.polar.catalogservice.catalog.infrastructure.BookRepository;
+import com.github.polar.catalogservice.config.DataConfig;
 import java.math.BigDecimal;
-import java.time.Instant;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
-import org.springframework.data.relational.core.conversion.DbActionExecutionException;
+import org.springframework.orm.jpa.JpaSystemException;
 
 @TestMethodOrder(MethodOrderer.Random.class)
-@Import(TestcontainersConfiguration.class)
+@Import({TestcontainersConfiguration.class, DataConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DataJdbcTest
+@DataJpaTest
 public class BookRepositoryTest {
 
     @Autowired BookRepository repo;
 
-    @Autowired JdbcAggregateTemplate template;
-
     @Test
     void findByIsbnNormalCase() {
-        template.save(
-                new Book(
-                        1L,
+        repo.save(
+                Book.of(
                         "1449373321",
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
-                        "Manning",
-                        Instant.now(),
-                        Instant.now(),
-                        0));
+                        "Manning"));
 
         assertThat(repo.findByIsbn("1449373321"))
                 .isPresent()
                 .get()
-                .extracting(Book::isbn)
+                .extracting(Book::getIsbn)
                 .isEqualTo("1449373321");
     }
 
@@ -55,51 +49,47 @@ public class BookRepositoryTest {
 
     @Test
     void saveBookWithExistingIsbnShouldFail() {
-        template.save(
-                new Book(
-                        1L,
+        repo.save(
+                Book.of(
                         "1449373321",
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
-                        "Manning",
-                        Instant.now(),
-                        Instant.now(),
-                        0));
+                        "Manning"));
 
-        assertThatThrownBy(
-                        () -> {
-                            repo.save(
-                                    Book.of(
-                                            "1449373321",
-                                            "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
-                                            "Martin Kleppmann",
-                                            new BigDecimal("59.99"),
-                                            "Manning"));
-                        })
-                .isInstanceOf(DbActionExecutionException.class)
-                .hasCauseInstanceOf(DataIntegrityViolationException.class);
+        try {
+            repo.saveAndFlush(
+                    Book.of(
+                            "1449373321",
+                            "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+                            "Martin Kleppmann",
+                            new BigDecimal("59.99"),
+                            "Manning"));
+        } catch (Exception ex) {
+            assertThat(ex)
+                    .isInstanceOfAny(
+                            DataIntegrityViolationException.class, JpaSystemException.class);
+            return;
+        }
+
+        throw new AssertionError("Expected duplicate ISBN to fail");
     }
 
     @Test
     void deleteByIsbnNotExisted() {
-        assertThat(repo.deleteByIsbn("1449373321")).isFalse();
+        assertThat(repo.deleteByIsbn("1449373321")).isZero();
     }
 
     @Test
     void deleteByIsbnExisted() {
-        template.save(
-                new Book(
-                        1L,
+        repo.save(
+                Book.of(
                         "1449373321",
                         "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
                         "Martin Kleppmann",
                         new BigDecimal("59.99"),
-                        "Manning",
-                        Instant.now(),
-                        Instant.now(),
-                        0));
+                        "Manning"));
 
-        assertThat(repo.deleteByIsbn("1449373321")).isTrue();
+        assertThat(repo.deleteByIsbn("1449373321")).isEqualTo(1);
     }
 }

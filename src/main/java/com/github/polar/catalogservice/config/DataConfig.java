@@ -1,9 +1,9 @@
 package com.github.polar.catalogservice.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-/** JDBC related configurations. */
+/** JPA related configurations. */
 @Configuration
-@EnableJdbcAuditing
+@EnableJpaAuditing
 public class DataConfig {}
