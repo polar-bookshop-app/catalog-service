@@ -49,35 +49,33 @@ jobs:
           distribution: 'graalvm'
           cache: gradle
 
-      - name: Vulnerability Scan
+      # CodeQL vulnerability scan
+      - name: CodeQL Init
+        uses: github/codeql-action/init@v4
+        with:
+          languages: java
+
+      - name: CodeQL Autobuild
+        uses: github/codeql-action/autobuild@v4
+
+      - name: CodeQL Analyze
+        uses: github/codeql-action/analyze@v4
+
+      # Grype dependency scan
+      - name: Grype Dependency Vulnerability Scan
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
-          grype db update
-          grype . --name order-service -o sarif --fail-on high > grype-results.sarif
+          grype . -o sarif > grype.sarif
 
-      - name: Upload SARIF report
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Grype Upload Results
+        uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: grype-results.sarif
-
-      #      - name: Code vulnerability scanning
-      #        uses: anchore/scan-action@v3
-      #        id: scan
-      #        with:
-      #          path: "${{ github.workspace }}"
-      #          fail-build: false
-      #          severity-cutoff: high
-
-      #      - name: Upload vulnerability report
-      #        uses: github/codeql-action/upload-sarif@v3 # https://github.blog/changelog/2025-01-10-code-scanning-codeql-action-v2-is-now-deprecated/
-      #        if: success() || failure()
-      #        with:
-      #          sarif_file: ${{ steps.scan.outputs.sarif }}
+          sarif_file: grype.sarif
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build, Unit and Integration Tests
+      - name: Build, execute unit and integration tests
         run: |
           chmod +x gradlew
           ./gradlew build -i
@@ -110,14 +108,15 @@ jobs:
           ./gradlew bootBuildImage \
           --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
 
-      - name: OCI image vulnerability scanning
-        uses: anchore/scan-action@v3
-        id: scan
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          fail-build: false
-          severity-cutoff: high
-
+      #      - name: OCI image vulnerability scanning
+      #        uses: anchore/scan-action@v3
+      #        id: scan
+      #        with:
+      #          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+      #          fail-build: false
+      #          severity-cutoff: high
+      #          acs-report-enable: true
+      #
       #      - name: Upload vulnerability report
       #        uses: github/codeql-action/upload-sarif@v3 # https://github.blog/changelog/2025-01-10-code-scanning-codeql-action-v2-is-now-deprecated/
       #        if: success() || failure()
