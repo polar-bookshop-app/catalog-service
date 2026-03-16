@@ -40,6 +40,14 @@ Catalog Service Spring Boot REST API application.
 
 We will use [grype](https://github.com/anchore/grype) as our vulnerability scanner for CI and locally.
 
+### Windows Grype
+
+To upgrade grype to latest version on windows use
+
+```bash
+choco upgrade grype -y
+```
+
 * Scan local repository
 
 ```bash

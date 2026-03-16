@@ -65,7 +65,7 @@ jobs:
       - name: Grype Dependency Vulnerability Scan
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
-          grype . -o sarif > grype.sarif
+          grype . --name catalog-service -o sarif > grype.sarif
 
       - name: Grype Upload Results
         uses: github/codeql-action/upload-sarif@v4
@@ -105,8 +105,7 @@ jobs:
       - name: Build container image
         run: |
           chmod +x gradlew 
-          ./gradlew bootBuildImage \
-          --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
 
       #      - name: OCI image vulnerability scanning
       #        uses: anchore/scan-action@v3
