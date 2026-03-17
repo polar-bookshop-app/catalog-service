@@ -1,13 +1,10 @@
-package com.github.polar.catalogservice.web;
+package com.github.polar.catalogservice.catalog.api;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.github.polar.catalogservice.catalog.api.BookController;
-import com.github.polar.catalogservice.catalog.api.BookRequest;
-import com.github.polar.catalogservice.catalog.api.BookResponse;
 import com.github.polar.catalogservice.catalog.application.BookService;
 import com.github.polar.catalogservice.catalog.domain.BookAlreadyExistsException;
 import com.github.polar.catalogservice.catalog.domain.BookNotFoundException;

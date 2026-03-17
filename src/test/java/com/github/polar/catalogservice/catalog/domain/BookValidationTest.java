@@ -1,8 +1,7 @@
-package com.github.polar.catalogservice.domain;
+package com.github.polar.catalogservice.catalog.domain;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import com.github.polar.catalogservice.catalog.domain.Book;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

@@ -1,10 +1,9 @@
-package com.github.polar.catalogservice.domain;
+package com.github.polar.catalogservice.catalog.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.polar.catalogservice.TestcontainersConfiguration;
 import com.github.polar.catalogservice.catalog.domain.Book;
-import com.github.polar.catalogservice.catalog.infrastructure.BookRepository;
 import com.github.polar.catalogservice.config.DataConfig;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.MethodOrderer;

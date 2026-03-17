@@ -1,8 +1,7 @@
-package com.github.polar.catalogservice.web;
+package com.github.polar.catalogservice.catalog.api;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import com.github.polar.catalogservice.catalog.api.BookRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
