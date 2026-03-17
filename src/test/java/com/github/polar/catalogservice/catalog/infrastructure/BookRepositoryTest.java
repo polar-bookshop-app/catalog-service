@@ -47,6 +47,24 @@ public class BookRepositoryTest {
     }
 
     @Test
+    void existsByIsbnWhenBookExists() {
+        repo.save(
+                Book.of(
+                        "1449373321",
+                        "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+                        "Martin Kleppmann",
+                        new BigDecimal("59.99"),
+                        "Manning"));
+
+        assertThat(repo.existsByIsbn("1449373321")).isTrue();
+    }
+
+    @Test
+    void existsByIsbnWhenBookDoesNotExist() {
+        assertThat(repo.existsByIsbn("1449373321")).isFalse();
+    }
+
+    @Test
     void saveBookWithExistingIsbnShouldFail() {
         repo.save(
                 Book.of(
@@ -90,5 +108,6 @@ public class BookRepositoryTest {
                         "Manning"));
 
         assertThat(repo.deleteByIsbn("1449373321")).isEqualTo(1);
+        assertThat(repo.findByIsbn("1449373321")).isEmpty();
     }
 }

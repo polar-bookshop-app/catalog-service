@@ -50,26 +50,28 @@ public class BookService {
 
     @Transactional
     public BookResponse updateOrCreateBook(String isbn, BookRequest request) {
-        BookRequest requestWithPathIsbn =
-                new BookRequest(
-                        isbn,
-                        request.title(),
-                        request.author(),
-                        request.price(),
-                        request.publisher());
-
         Book savedBook =
                 bookRepository
                         .findByIsbn(isbn)
                         .map(
                                 existingBook -> {
-                                    bookMapper.updateBook(requestWithPathIsbn, existingBook);
+                                    existingBook.updateDetails(
+                                            request.title(),
+                                            request.author(),
+                                            request.price(),
+                                            request.publisher());
                                     return bookRepository.save(existingBook);
                                 })
                         .orElseGet(
                                 () ->
                                         bookRepository.save(
-                                                bookMapper.toDomain(requestWithPathIsbn)));
+                                                bookMapper.toDomain(
+                                                        new BookRequest(
+                                                                isbn,
+                                                                request.title(),
+                                                                request.author(),
+                                                                request.price(),
+                                                                request.publisher()))));
 
         return bookMapper.toResponse(savedBook);
     }
