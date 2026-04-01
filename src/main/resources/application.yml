@@ -41,12 +41,10 @@ spring:
         jdbc:
           time_zone: UTC
 
+server:
   tomcat:
-    connection-timeout: 2s # default 20
     keep-alive-timeout: 15s
-    threads:
-      max: 30 # default 200
-      min-spare: 5 # default 10
+    connection-timeout: 2s # default 20
   shutdown: graceful
 
 app:
